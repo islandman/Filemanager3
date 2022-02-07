@@ -1,0 +1,166 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-file-heading" data-cy="FileCreateUpdateHeading" jhiTranslate="filemanager3App.file.home.createOrEditLabel">
+        Create or edit a File
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.uuid" for="field_uuid">Uuid</label>
+          <input type="text" class="form-control" name="uuid" id="field_uuid" data-cy="uuid" formControlName="uuid" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.directoryUuid" for="field_directoryUuid"
+            >Directory Uuid</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="directoryUuid"
+            id="field_directoryUuid"
+            data-cy="directoryUuid"
+            formControlName="directoryUuid"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.remotePath" for="field_remotePath">Remote Path</label>
+          <input
+            type="text"
+            class="form-control"
+            name="remotePath"
+            id="field_remotePath"
+            data-cy="remotePath"
+            formControlName="remotePath"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.tenantId" for="field_tenantId">Tenant Id</label>
+          <input type="number" class="form-control" name="tenantId" id="field_tenantId" data-cy="tenantId" formControlName="tenantId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.contentType" for="field_contentType">Content Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="contentType"
+            id="field_contentType"
+            data-cy="contentType"
+            formControlName="contentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.sizz" for="field_sizz">Sizz</label>
+          <input type="number" class="form-control" name="sizz" id="field_sizz" data-cy="sizz" formControlName="sizz" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.createDate" for="field_createDate">Create Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createDate"
+              data-cy="createDate"
+              type="datetime-local"
+              class="form-control"
+              name="createDate"
+              formControlName="createDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.userName" for="field_userName">User Name</label>
+          <input type="text" class="form-control" name="userName" id="field_userName" data-cy="userName" formControlName="userName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.content" for="field_content">Content</label>
+          <div>
+            <div *ngIf="editForm.get('content')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('content')!.value, editForm.get('contentContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left">{{ editForm.get('contentContentType')!.value }}, {{ byteSize(editForm.get('content')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ content: null }); editForm.patchValue({ contentContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_content"
+              data-cy="content"
+              (change)="setFileData($event, 'content', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="content" id="field_content" data-cy="content" formControlName="content" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="contentContentType"
+            id="field_contentContentType"
+            formControlName="contentContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.virtualPath" for="field_virtualPath">Virtual Path</label>
+          <input
+            type="text"
+            class="form-control"
+            name="virtualPath"
+            id="field_virtualPath"
+            data-cy="virtualPath"
+            formControlName="virtualPath"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="filemanager3App.file.isDir" for="field_isDir">Is Dir</label>
+          <input type="checkbox" class="form-check" name="isDir" id="field_isDir" data-cy="isDir" formControlName="isDir" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "filemanager3App": {
+    "directory": {
+      "home": {
+        "title": "Directories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Directory",
+        "createOrEditLabel": "Create or edit a Directory",
+        "notFound": "No Directories found"
+      },
+      "created": "A new Directory is created with identifier {{ param }}",
+      "updated": "A Directory is updated with identifier {{ param }}",
+      "deleted": "A Directory is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Directory {{ id }}?"
+      },
+      "detail": {
+        "title": "Directory"
+      },
+      "id": "ID",
+      "uuid": "Uuid",
+      "parentUuid": "Parent Uuid",
+      "name": "Name",
+      "tenantId": "Tenant Id",
+      "createDate": "Create Date",
+      "userName": "User Name",
+      "numFiles": "Num Files",
+      "isDir": "Is Dir",
+      "virtualPath": "Virtual Path"
+    }
+  }
+}

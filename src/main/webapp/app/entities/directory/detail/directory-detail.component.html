@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="directory">
+      <h2 data-cy="directoryDetailsHeading"><span jhiTranslate="filemanager3App.directory.detail.title">Directory</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ directory.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.directory.uuid">Uuid</span></dt>
+        <dd>
+          <span>{{ directory.uuid }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.directory.parentUuid">Parent Uuid</span></dt>
+        <dd>
+          <span>{{ directory.parentUuid }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.directory.name">Name</span></dt>
+        <dd>
+          <span>{{ directory.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.directory.tenantId">Tenant Id</span></dt>
+        <dd>
+          <span>{{ directory.tenantId }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.directory.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ directory.createDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.directory.userName">User Name</span></dt>
+        <dd>
+          <span>{{ directory.userName }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.directory.numFiles">Num Files</span></dt>
+        <dd>
+          <span>{{ directory.numFiles }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.directory.isDir">Is Dir</span></dt>
+        <dd>
+          <span>{{ directory.isDir }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.directory.virtualPath">Virtual Path</span></dt>
+        <dd>
+          <span>{{ directory.virtualPath }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/directory', directory.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

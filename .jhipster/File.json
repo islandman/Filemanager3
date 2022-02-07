@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20220207212552",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "file",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "directoryUuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remotePath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tenantId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "contentType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sizz",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "userName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "virtualPath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isDir",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "File",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

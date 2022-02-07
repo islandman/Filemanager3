@@ -1,0 +1,39 @@
+ 
+entity File {
+	
+	uuid String ,
+	directoryUuid String,
+	name String,
+	remotePath String,
+	tenantId Long,
+	contentType String,
+        sizz 	Long,
+	createDate Instant,
+	userName String,
+	content Blob,
+	virtualPath String,
+	isDir Boolean
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Directory {
+ 
+         uuid 	String, 
+	parentUuid String ,
+	name String ,
+	tenantId Long ,
+	createDate Instant ,
+	userName String ,
+	numFiles Integer ,
+ 	isDir Boolean,
+	virtualPath String 
+}
+
+
+/* Set pagination options*/
+paginate Directory, File with infinite-scroll
+ 
+ 

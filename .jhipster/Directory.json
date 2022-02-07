@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20220207212553",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "directory",
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "parentUuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tenantId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "userName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numFiles",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isDir",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "virtualPath",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Task entity.\\n@author The JHipster team.",
+  "jpaMetamodelFiltering": false,
+  "name": "Directory",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

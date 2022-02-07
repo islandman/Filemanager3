@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="file">
+      <h2 data-cy="fileDetailsHeading"><span jhiTranslate="filemanager3App.file.detail.title">File</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ file.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.uuid">Uuid</span></dt>
+        <dd>
+          <span>{{ file.uuid }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.directoryUuid">Directory Uuid</span></dt>
+        <dd>
+          <span>{{ file.directoryUuid }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.name">Name</span></dt>
+        <dd>
+          <span>{{ file.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.remotePath">Remote Path</span></dt>
+        <dd>
+          <span>{{ file.remotePath }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.tenantId">Tenant Id</span></dt>
+        <dd>
+          <span>{{ file.tenantId }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.contentType">Content Type</span></dt>
+        <dd>
+          <span>{{ file.contentType }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.sizz">Sizz</span></dt>
+        <dd>
+          <span>{{ file.sizz }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ file.createDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.userName">User Name</span></dt>
+        <dd>
+          <span>{{ file.userName }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.content">Content</span></dt>
+        <dd>
+          <div *ngIf="file.content">
+            <a (click)="openFile(file.content, file.contentContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ file.contentContentType }}, {{ byteSize(file.content) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.virtualPath">Virtual Path</span></dt>
+        <dd>
+          <span>{{ file.virtualPath }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanager3App.file.isDir">Is Dir</span></dt>
+        <dd>
+          <span>{{ file.isDir }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/file', file.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

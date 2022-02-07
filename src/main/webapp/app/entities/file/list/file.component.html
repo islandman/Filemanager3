@@ -1,0 +1,111 @@
+<div>
+  <h2 id="page-heading" data-cy="FileHeading">
+    <span jhiTranslate="filemanager3App.file.home.title">Files</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="filemanager3App.file.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-file"
+        [routerLink]="['/file/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="filemanager3App.file.home.createLabel"> Create a new File </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="files?.length === 0">
+    <span jhiTranslate="filemanager3App.file.home.notFound">No files found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="files && files.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="uuid"><span jhiTranslate="filemanager3App.file.uuid">Uuid</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="directoryUuid">
+            <span jhiTranslate="filemanager3App.file.directoryUuid">Directory Uuid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="filemanager3App.file.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="remotePath">
+            <span jhiTranslate="filemanager3App.file.remotePath">Remote Path</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="tenantId">
+            <span jhiTranslate="filemanager3App.file.tenantId">Tenant Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="contentType">
+            <span jhiTranslate="filemanager3App.file.contentType">Content Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sizz"><span jhiTranslate="filemanager3App.file.sizz">Sizz</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="createDate">
+            <span jhiTranslate="filemanager3App.file.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userName">
+            <span jhiTranslate="filemanager3App.file.userName">User Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="content">
+            <span jhiTranslate="filemanager3App.file.content">Content</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="virtualPath">
+            <span jhiTranslate="filemanager3App.file.virtualPath">Virtual Path</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="isDir">
+            <span jhiTranslate="filemanager3App.file.isDir">Is Dir</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let file of files; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/file', file.id, 'view']">{{ file.id }}</a>
+          </td>
+          <td>{{ file.uuid }}</td>
+          <td>{{ file.directoryUuid }}</td>
+          <td>{{ file.name }}</td>
+          <td>{{ file.remotePath }}</td>
+          <td>{{ file.tenantId }}</td>
+          <td>{{ file.contentType }}</td>
+          <td>{{ file.sizz }}</td>
+          <td>{{ file.createDate | formatMediumDatetime }}</td>
+          <td>{{ file.userName }}</td>
+          <td>
+            <a *ngIf="file.content" (click)="openFile(file.content, file.contentContentType)" jhiTranslate="entity.action.open">open</a>
+            <span *ngIf="file.content">{{ file.contentContentType }}, {{ byteSize(file.content) }}</span>
+          </td>
+          <td>{{ file.virtualPath }}</td>
+          <td>{{ file.isDir }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/file', file.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/file', file.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(file)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
